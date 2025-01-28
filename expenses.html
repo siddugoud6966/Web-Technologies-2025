@@ -1,0 +1,12 @@
+<!-- expenses.html -->
+<div>
+    <h2>Expenses</h2>
+    <form ng-submit="addExpense()">
+        <input type="text" ng-model="newExpense.name" placeholder="Expense Name" required>
+        <input type="number" ng-model="newExpense.amount" placeholder="Amount" required>
+        <button type="submit">Add Expense</button>
+    </form>
+    <ul>
+        <li ng-repeat="expense in expenses">{{ expense.name }}: {{ expense.amount }}</li>
+    </ul>
+</div>
