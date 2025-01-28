@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weatherApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: Lavender; }
+        .error { color: red; }
+        .weather-info { margin-top: 20px; background-color: skyblue; padding: 20px; border-radius: 10px; }
+        .favorite-cities { background-color: #C9E4CA; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body ng-controller="WeatherController">
+
+    <h1 style="color:Black;">Weather Dashboard</h1>
+    <input type="text" ng-model="city" placeholder="Enter city name" style="width: 20%; padding: 10px; font-size: 18px; border-radius: 10px; border: 1px solid #ccc;" />
+    <button ng-click="getWeather()" style="background-color: black; color: #fff; padding: 10px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer;">Get Weather</button>
+
+    <div class="error" ng-if="errorMessage" style="margin-top: 20px;">{{ errorMessage }}</div>
+
+    <div class="weather-info" ng-if="weatherData">
+        <h2 style="color: #007bff;">Weather in {{ weatherData.name }}</h2>
+        <p>Temperature: {{ weatherData.main.temp }} °C</p>
+        <p>Humidity: {{ weatherData.main.humidity }} %</p>
+        <p>Conditions: {{ weatherData.weather[0].description }}</p>
+    </div>
+
+    <h1 style="color: Black">Favorite Cities</h1>
+    <div class="favorite-cities">
+        <input type="text" ng-model="favoriteCity" placeholder="Add favorite city" style="width: 20%; padding: 10px; font-size: 18px; border-radius: 10px; border: 1px solid #ccc;" />
+        <button ng-click="addFavorite()" style="background-color: black; color: #fff; padding: 10px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer;">Add to Favorites</button>
+
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            <li ng-repeat="fav in favorites" ng-click="getWeather(fav)" style="padding: 10px; border-bottom: 1px solid #ccc; cursor: pointer;">{{ fav }}</li>
+        </ul>
+    </div>
+
+</body>
+</html>
